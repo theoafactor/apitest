@@ -15,3 +15,11 @@ jobs:
               with: 
                 username: ${{ secrets.DOCKERHUB_USERNAME }}
                 password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+            - name: "Resolve the image tag"
+              run: |
+                deployment_tag=$( git describe)
+
+            - name: "Build a Docker Image"
+              run: |
+                docker build -t apitest:1
