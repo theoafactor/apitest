@@ -25,5 +25,5 @@ jobs:
 
             - name: "Build a Docker Image"
               run: |
-                echo ${{ steps.tag_generator.outputs }}
+                echo ${{ steps.tag_generator.outputs.deployment_tag }}
                
