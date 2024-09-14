@@ -20,11 +20,11 @@ jobs:
               id: tag_generator
               run: |
                 deployment_tag=$( git describe --always)
-                # echo "::set-output name=DEPLOYMENT_TAG::$deployment_tag"
+                echo "$deployment_tag" >> $GITHUB_OUTPUT
                 
 
 
             - name: "Build a Docker Image"
               run: |
-                # echo ${{ steps.tag_generator}}
-                echo $GITHUB_OUTPUT
+                echo ${{ steps.tag_generator.outputs }}
+               
