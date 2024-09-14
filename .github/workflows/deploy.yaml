@@ -5,7 +5,7 @@ on:
             - master
 jobs:
     deploy:
-        runs-on: ubuntu-latest
+        runs-on: self-hosted
         steps: 
             - name: "checksout the repository"
               uses: actions/checkout@v4
@@ -21,8 +21,7 @@ jobs:
               run: |
                 echo "deployment_tag=$( git describe --always)" >> $GITHUB_OUTPUT
                 echo "image_name=apitest" >> $GITHUB_OUTPUT
-                
-                
+            
 
 
             - name: "Build a Docker Image"
@@ -32,4 +31,4 @@ jobs:
                
             - name: "Run the Docker image"
               run: |
-                docker run -d --name apitest ${{ secrets.DOCKERHUB_USERNAME }}/${{ steps.tag_generator.outputs.image_name }}:${{ steps.tag_generator.outputs.deployment_tag }} -e PORT=${{ secrets.PORT }}
+                docker run -d --name apitest -e PORT=${{ secrets.PORT }} ${{ secrets.DOCKERHUB_USERNAME }}/${{ steps.tag_generator.outputs.image_name }}:${{ steps.tag_generator.outputs.deployment_tag }}
