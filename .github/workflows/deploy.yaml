@@ -20,11 +20,13 @@ jobs:
               id: tag_generator
               run: |
                 echo "deployment_tag=$( git describe --always)" >> $GITHUB_OUTPUT
+                echo "image_name=apitest" >> $GITHUB_OUTPUT
+                
                 
 
 
             - name: "Build a Docker Image"
               run: |
-                docker build -t theoafactor/apitest:${{ steps.tag_generator.outputs.deployment_tag }} .
-                docker push theoafactor/apitest:${{ steps.tag_generator.outputs.deployment_tag }}
+                docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/${{ steps.tag_generator.outputs.image_name }}:${{ steps.tag_generator.outputs.deployment_tag }} .
+                docker push ${{ secrets.DOCKERHUB_USERNAME }}/${{ steps.tag_generator.outputs.image_name }}:${{ steps.tag_generator.outputs.deployment_tag }}
                
