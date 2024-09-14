@@ -19,8 +19,7 @@ jobs:
             - name: "Resolve the image tag"
               id: tag_generator
               run: |
-                deployment_tag=$( git describe --always)
-                echo "$deployment_tag" >> $GITHUB_OUTPUT
+                echo "deployment_tag=$( git describe --always)" >> $GITHUB_OUTPUT
                 
 
 
