@@ -17,9 +17,14 @@ jobs:
                 password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
             - name: "Resolve the image tag"
+              id: tag_generator
               run: |
-                deployment_tag=$( git describe)
+                deployment_tag=$( git describe --always)
+                # echo "::set-output name=DEPLOYMENT_TAG::$deployment_tag"
+                
+
 
             - name: "Build a Docker Image"
               run: |
-                docker build -t apitest:1
+                # echo ${{ steps.tag_generator}}
+                echo $GITHUB_OUTPUT
