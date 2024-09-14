@@ -10,6 +10,6 @@ COPY . .
 
 EXPOSE 80
 
-# ENV PORT=80
+ENV PORT=80
 
 ENTRYPOINT ["node", "server.js"]
