@@ -25,5 +25,6 @@ jobs:
 
             - name: "Build a Docker Image"
               run: |
-                echo ${{ steps.tag_generator.outputs.deployment_tag }}
+                docker build -t theoafactor/apitest:${{ steps.tag_generator.outputs.deployment_tag }}
+                docker push theoafactor/apitest:${{ steps.tag_generator.outputs.deployment_tag }}
                
