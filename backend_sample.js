@@ -17,16 +17,13 @@ server.get("/", (request, response)  => {
 
 
 // checks for request
-server.get("/submit_application", async (request, response) => {
-
-    // sends the request to the backend
-    let feedback = await axios.get("http://10.0.2.0/submit");
+server.get("/submit", (request, response) => {
 
 
 
     response.send({
         message: "Application submitted successfully!",
-        feedback: feedback
+        data: "Backend responded successfully"
     })
 
 
